@@ -1,0 +1,17 @@
+/.idea
+/.git
+/src/expo/public/hot
+/src/expo/public/storage
+/src/expo/storage/*.key
+/src/expo/vendor
+/src/expo/composer.lock
+/src/expo/node_modules
+/src/expo.phpunit.result.cache
+/src/expoHomestead.json
+/src/expoHomestead.yaml
+/src/exponpm-debug.log
+/src/expoyarn-error.log
+/node_modules
+/docker/log
+
+
