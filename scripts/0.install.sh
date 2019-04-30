@@ -17,7 +17,7 @@ sudo docker-compose up -d --build
 if [ ! -f ${SRCENV} ]
 then
     sudo docker-compose exec app composer create-project laravel/laravel $PRDIR --prefer-dist
-
+    cp ${DOCDIR}/etc/.env ${FLDIR}/.env
     cd $FLDIR
     rm -f ./.gitinore
 
