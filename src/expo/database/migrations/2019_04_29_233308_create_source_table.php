@@ -58,9 +58,6 @@ class CreateSourceTable extends Migration
 
         });
 
-        /*
-         * Data in number format. Contains link to block
-         */
         Schema::create('number_record', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
