@@ -20,8 +20,8 @@ class CreateSourceTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->bigIncrements('id')->unsigned();
-            $table->string('link')->comment('Link from cron source');
-            $table->string('key')->comment('User auth key source');
+            $table->string('link')->nullable()->comment('Link from cron source');
+            $table->string('key')->nullable()->comment('User auth key source');
             $table->enum('type', ['cron', 'user']);
             $table->timestamps();
         });
@@ -49,8 +49,8 @@ class CreateSourceTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->bigIncrements('id')->unsigned();
+            $table->string('name', 50);
             $table->bigInteger('tmpl_id')->unsigned();
-            $table->smallInteger('position')->unsigned();
             $table->enum('block_type', ['graph', 'number'])->default('number');
             $table->timestamps();
 
@@ -79,8 +79,8 @@ class CreateSourceTable extends Migration
             $table->bigInteger('source_id')->unsigned();
             $table->json('content');
             $table->enum('graph_type', ['line', 'pie'])->default('line');
-            $table->timestamp('graph_start')->nullable();
-            $table->timestamp('graph_finish')->nullable();
+            $table->integer('graph_start')->unsigned()->nullable();
+            $table->integer('graph_finish')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('block_id')->references('id')->on('blocks')->onUpdate('cascade')->onDelete('cascade');
