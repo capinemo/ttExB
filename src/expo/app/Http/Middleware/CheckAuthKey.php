@@ -6,6 +6,7 @@ use Closure;
 
 class CheckAuthKey
 {
+    private $API_KEY = '123';
     /**
      * Handle an incoming request.
      *
@@ -15,7 +16,7 @@ class CheckAuthKey
      */
     public function handle($request, Closure $next)
     {
-        if ($request->header('authorization') !== '123') {
+        if ($this->API_KEY !== $request->header('authorization')) {
             return response('[]', 404)
                 ->header('Content-Type', 'application/json');
         }

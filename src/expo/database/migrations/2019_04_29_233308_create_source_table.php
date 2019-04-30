@@ -16,7 +16,7 @@ class CreateSourceTable extends Migration
         /**
          * Table with structure sources (Key of user or link of service via cron
          */
-        Schema::create('source', function (Blueprint $table) {
+        Schema::create('sources', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->bigIncrements('id')->unsigned();
@@ -38,7 +38,7 @@ class CreateSourceTable extends Migration
             $table->mediumText('data');
             $table->timestamps();
 
-            $table->foreign('source_id')->references('id')->on('source')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('source_id')->references('id')->on('sources')->onUpdate('cascade')->onDelete('restrict');
             $table->index('name','index_name');
         });
 
@@ -58,7 +58,7 @@ class CreateSourceTable extends Migration
 
         });
 
-        Schema::create('number_record', function (Blueprint $table) {
+        Schema::create('number_recs', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->bigIncrements('id')->unsigned();
@@ -68,10 +68,10 @@ class CreateSourceTable extends Migration
             $table->timestamps();
 
             $table->foreign('block_id')->references('id')->on('blocks')->onUpdate('cascade')->onDelete('restrict');
-            $table->foreign('source_id')->references('id')->on('source')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('source_id')->references('id')->on('sources')->onUpdate('cascade')->onDelete('restrict');
         });
 
-        Schema::create('graph_record', function (Blueprint $table) {
+        Schema::create('graph_recs', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->bigIncrements('id')->unsigned();
@@ -84,7 +84,7 @@ class CreateSourceTable extends Migration
             $table->timestamps();
 
             $table->foreign('block_id')->references('id')->on('blocks')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('source_id')->references('id')->on('source')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('source_id')->references('id')->on('sources')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -95,10 +95,10 @@ class CreateSourceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('source');
+        Schema::dropIfExists('sources');
         Schema::dropIfExists('templates');
         Schema::dropIfExists('blocks');
-        Schema::dropIfExists('number_record');
-        Schema::dropIfExists('graph_record');
+        Schema::dropIfExists('number_recs');
+        Schema::dropIfExists('graph_recs');
     }
 }
