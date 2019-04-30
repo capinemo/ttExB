@@ -13,5 +13,6 @@
 /src/expoyarn-error.log
 /node_modules
 /docker/log
+/docker/db
 
 

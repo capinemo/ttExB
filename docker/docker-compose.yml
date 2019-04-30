@@ -26,6 +26,8 @@ services:
     restart: always
     ports:
       - 3306:3306
+    volumes:
+      - ./db:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: toor
       MYSQL_DATABASE: expo
