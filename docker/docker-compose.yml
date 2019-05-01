@@ -14,7 +14,7 @@ services:
 
   app:
     build:
-      ./etc
+      ./etc/app
     volumes:
       - ../src:/var/www/html
       - ./etc/php.ini:/usr/local/etc/php/php.ini

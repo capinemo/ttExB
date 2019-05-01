@@ -23,6 +23,10 @@ cd $DOCDIR
 
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:provider StructureServiceProvider"
 
+#sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:command RunGenPage"
+#sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan command:gen"
+#sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan schedule:run"
+
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan migrate"
-sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan db:seed"
+#sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan db:seed"
 
