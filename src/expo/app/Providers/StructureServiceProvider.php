@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Faker\Provider\DateTime;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Template;
 use App\Models\GraphRec;
@@ -54,7 +53,7 @@ class StructureServiceProvider extends ServiceProvider
         $list_of_block_keys = array_column($blocks, 'id');
         $last = self::calcInterval($period);
 
-        $graph = GraphRec::select()
+        $graph = GraphRec::select('graph_recs.*', 'blocks.name', 'blocks.tmpl_id', 'blocks.block_type')
             ->join('blocks', 'blocks.id', '=', 'graph_recs.block_id')
             ->whereIn('block_id', $list_of_block_keys)
             ->where('graph_recs.graph_start', '>=', $last[0])
@@ -62,10 +61,12 @@ class StructureServiceProvider extends ServiceProvider
             ->get()
             ->toArray();
 
-        $number = NumberRec::select()
+        $number = NumberRec::select('number_recs.*', 'blocks.name', 'blocks.tmpl_id', 'blocks.block_type')
             ->join('blocks', 'blocks.id', '=', 'number_recs.block_id')
             ->whereIn('block_id', $list_of_block_keys)
             ->where('number_recs.insert_at', '>=', $last[0])
+            ->orderBy('number_recs.id', 'desc')
+            ->take(1)
             ->get()
             ->toArray();
 
