@@ -17,12 +17,10 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 
-Route::get('/sources', function () {
-    return 321;
-});
+Route::get('/sources', 'SourceController@index');
 
-Route::get('/templates/{name?}/{task?}', function ($name = null, $task = null) {
-    return $name . ' ' . $task;
-});
+Route::get('/templates/{name}/', 'TemplateController@find');
 
+Route::get('/templates/{name}/data/', 'TemplateController@data');
 
+Route::get('/templates', 'TemplateController@index');

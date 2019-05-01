@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class GraphRec extends Model
 {
+    public $timestamps = false;
+
     /*
      * Relations
      */

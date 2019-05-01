@@ -17,7 +17,8 @@ class CheckAuthKey
     public function handle($request, Closure $next)
     {
         // if request to www - disable key checking
-        if (!preg_match('/^(http[s]?:\/\/){0,1}([^\/]+)\/api\/([^\/]+)$/i', $request->fullUrl())) {
+        // if (!preg_match('/^(http[s]?:\/\/){0,1}([^\/]+)\/api\/([^\/]+)$/i', $request->fullUrl())) {
+         if (!$request->is('api/*')) {
             return $next($request);
         }
 
