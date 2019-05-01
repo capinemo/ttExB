@@ -11,12 +11,18 @@ cd $DOCDIR
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:model Models/Block"
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:model Models/NumberRec"
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:model Models/GraphRec"
+
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:seeder SourceTableSeeder"
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:seeder TemplateTableSeeder"
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:seeder BlockTableSeeder"
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:seeder NumberRecTableSeeder"
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:seeder GraphRecTableSeeder"
 
-sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan migrate"
+#sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:controller SourceController"
+#sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:controller TemplateController"
+
+#sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:provider StructureServiceProvider"
+
+#sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan migrate"
 sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan db:seed"
 
