@@ -15,18 +15,18 @@ class GraphRecTableSeeder extends Seeder
             [
                 'block_id' => 2,
                 'source_id' => 3,
-                'content' => '{"1556646279":10, "1556647379":55}',
+                'content' => '{"2019-05-01 22:10:12":10, "2019-05-01 22:40:12":55}',
                 'graph_type' => 'line',
-                'graph_start' => '1556646279',
-                'graph_finish'=>'1556647379'
+                'graph_start' => '2019-05-01 22:10:12',
+                'graph_finish'=>'2019-05-01 22:40:12'
             ], // id:1
             [
                 'block_id' => 5,
                 'source_id' => 1,
-                'content' => '{"1556640179":40, "1556646279":60}',
+                'content' => '{"2019-05-01 20:10:12":40, "2019-05-01 20:30:12":60}',
                 'graph_type' => 'line',
-                'graph_start' => '1556640179',
-                'graph_finish'=>'1556646279'
+                'graph_start' => '2019-05-01 20:10:12',
+                'graph_finish'=>'2019-05-01 20:30:12'
             ], // id:2
         ]);
 

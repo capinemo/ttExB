@@ -23,7 +23,7 @@ class CreateSourceTable extends Migration
             $table->string('link')->nullable()->comment('Link from cron source');
             $table->string('key')->nullable()->comment('User auth key source');
             $table->enum('type', ['cron', 'user']);
-            $table->timestamps();
+            $table->dateTime('insert_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
         /**
@@ -36,7 +36,7 @@ class CreateSourceTable extends Migration
             $table->bigInteger('source_id')->unsigned();
             $table->string('name', 50);
             $table->mediumText('data');
-            $table->timestamps();
+            $table->dateTime('insert_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 
             $table->foreign('source_id')->references('id')->on('sources')->onUpdate('cascade')->onDelete('restrict');
             $table->index('name','index_name');
@@ -52,7 +52,7 @@ class CreateSourceTable extends Migration
             $table->string('name', 50);
             $table->bigInteger('tmpl_id')->unsigned();
             $table->enum('block_type', ['graph', 'number'])->default('number');
-            $table->timestamps();
+            $table->dateTime('insert_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 
             $table->foreign('tmpl_id')->references('id')->on('templates')->onUpdate('cascade')->onDelete('restrict');
 
@@ -65,7 +65,7 @@ class CreateSourceTable extends Migration
             $table->bigInteger('block_id')->unsigned();
             $table->bigInteger('source_id')->unsigned();
             $table->double('content', 50, 15);
-            $table->timestamps();
+            $table->dateTime('insert_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 
             $table->foreign('block_id')->references('id')->on('blocks')->onUpdate('cascade')->onDelete('restrict');
             $table->foreign('source_id')->references('id')->on('sources')->onUpdate('cascade')->onDelete('restrict');
@@ -79,9 +79,9 @@ class CreateSourceTable extends Migration
             $table->bigInteger('source_id')->unsigned();
             $table->json('content');
             $table->enum('graph_type', ['line', 'pie'])->default('line');
-            $table->integer('graph_start')->unsigned()->nullable();
-            $table->integer('graph_finish')->unsigned()->nullable();
-            $table->timestamps();
+            $table->dateTime('graph_start')->nullable();
+            $table->dateTime('graph_finish')->nullable();
+            $table->dateTime('insert_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 
             $table->foreign('block_id')->references('id')->on('blocks')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('source_id')->references('id')->on('sources')->onUpdate('cascade')->onDelete('cascade');
