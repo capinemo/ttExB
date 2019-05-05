@@ -57,15 +57,10 @@ class RunGenPage extends Command
         if (!preg_match('/^([0-9]+)$/i', $num)) {
             // save error
         }
-        /**
-         * handling errors
-         *   var_dump(curl_error($ch));
-         */
 
         curl_close($ch);
 
-        echo '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!';
-
+        // TODO must be moved to service provider
         $num_rec = new NumberRec();
         $num_rec->block_id = 1;
         $num_rec->source_id = 3;

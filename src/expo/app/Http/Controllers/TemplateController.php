@@ -17,11 +17,12 @@ class TemplateController extends Controller
     /**
      * Returns structure
      */
-    public function find(string $name)
+    public function find(string $id)
     {
-        $name = preg_replace('/[^a-zA-Z\d\-\_]/', '', $name);
+        //$name = preg_replace('/[^a-zA-Z\d\-\_]/', '', $name);
+        $id = preg_replace('/[^\d]/', '', $id);
 
-        if ($response = Structure::findTemplate($name)) {
+        if ($response = Structure::findTemplate((int) $id)) {
             return $response;
         }
 
@@ -43,7 +44,11 @@ class TemplateController extends Controller
         $start = $request->post('start') ?? null; // TODO: need a sanitizing
         $stop = $request->post('stop') ?? null; // TODO: need a sanitizing
 
-        $filter = $period ? $period : [$start, $stop];
+        $filter = $start && $stop
+            ? [$start, $stop]
+            : $period
+                ? $period
+                : null;
 
         if ($response =  Structure::findDataForTemplate($name, $filter)) {
             return $response;
