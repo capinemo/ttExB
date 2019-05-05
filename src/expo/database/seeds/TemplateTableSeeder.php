@@ -22,8 +22,8 @@ class TemplateTableSeeder extends Seeder
             [
                 'source_id' => 1,
                 'name' => 'user_template',
-                'data' => '<div><h1>User</h1><h2>Блок 1</h2><reportComponent id="block21"></reportComponent>'
-                    . '<h2>Блок 2</h2><reportComponent id="block22"></reportComponent><h2>Блок 3</h2>'
+                'data' => '<div><h1>User</h1><h2>Блок 14</h2><reportComponent id="block21"></reportComponent>'
+                    . '<h2>Блок 15</h2><reportComponent id="block22"></reportComponent><h2>Блок 16</h2>'
                     . '<reportComponent id="block13"></reportComponent></div>'
             ], // id:2
         ]);

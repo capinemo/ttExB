@@ -11,6 +11,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        DB::table('graph_recs')->truncate();
+        DB::table('number_recs')->truncate();
+        DB::table('blocks')->truncate();
+        DB::table('templates')->truncate();
+        DB::table('sources')->truncate();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         $this->call(SourceTableSeeder::class);
         $this->call(TemplateTableSeeder::class);
         $this->call(BlockTableSeeder::class);

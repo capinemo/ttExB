@@ -36,6 +36,10 @@ cd $DOCDIR
 #sudo docker-compose exec app bash -c "cd ./${PRDIR} && laravel-echo-server stop"
 #sudo docker-compose exec app bash -c "cd ./${PRDIR} && laravel-echo-server start" >>/dev/null 2>&1 &
 
+
+
+
+
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan migrate"
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan db:seed"
 #sudo docker-compose exec app bash -c "cd ./${PRDIR} && npm run dev"
