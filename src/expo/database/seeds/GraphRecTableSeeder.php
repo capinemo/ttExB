@@ -35,7 +35,9 @@ class GraphRecTableSeeder extends Seeder
                 'block_id' => 6,
                 'source_id' => 1,
                 'content' => '{"test1":50, "test2":20, "test3":30}',
-                'graph_type' => 'pie'
+                'graph_type' => 'pie',
+                'graph_start' => '2019-05-01 20:10:12',
+                'graph_finish'=>'2019-05-01 20:30:12'
             ], // id:3
         ]);
     }
