@@ -12,9 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.welcome');
 });
 
+Route::get('/report', 'ReportController@index');
+
 Route::get('/gen', function () {
-    return (int) date('s');
+    return rand(1, 60);
 });

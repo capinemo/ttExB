@@ -19,8 +19,8 @@ use Illuminate\Http\Request;
 
 Route::get('/sources', 'SourceController@index');
 
-Route::get('/templates/{name}/', 'TemplateController@find');
+Route::get('/templates/{id}/', 'TemplateController@find');
 
-Route::get('/templates/{name}/data/', 'TemplateController@data');
+Route::get('/templates/{id}/data/', 'TemplateController@data');
 
 Route::get('/templates', 'TemplateController@index');
