@@ -6,6 +6,7 @@
 /src/expo/vendor
 /src/expo/composer.lock
 /src/expo/node_modules
+/src/expo/package-lock.json
 /src/expo.phpunit.result.cache
 /src/expoHomestead.json
 /src/expoHomestead.yaml

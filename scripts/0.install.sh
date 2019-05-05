@@ -23,6 +23,7 @@ then
 
     sudo chmod -R o+w storage
     sudo chmod -R o+w bootstrap/cache
-else
-    sudo docker-compose exec app bash -c "cd ./${PRDIR} && composer update"
 fi
+
+sudo docker-compose exec app bash -c "cd ./${PRDIR} && composer update"
+sudo docker-compose exec app bash -c "cd ./${PRDIR} && npm install"

@@ -20,6 +20,7 @@ cd $DOCDIR
 
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:controller SourceController"
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:controller TemplateController"
+#sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:controller ReportController"
 
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:provider StructureServiceProvider"
 
@@ -27,6 +28,15 @@ cd $DOCDIR
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan command:gen"
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan schedule:run"
 
+#sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan make:test gen"
+
+#sudo docker-compose exec app bash -c "cd ./${PRDIR} && npm install vue-router -D"
+#sudo docker-compose exec app bash -c "cd ./${PRDIR} && npm run watch"
+
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan migrate"
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan db:seed"
+sudo docker-compose exec app bash -c "cd ./${PRDIR} && npm run dev"
+
+
+
 
