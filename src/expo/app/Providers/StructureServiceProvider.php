@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Template;
 use App\Models\GraphRec;
@@ -29,16 +30,16 @@ class StructureServiceProvider extends ServiceProvider
         //
     }
 
-    public static function findTemplate(string $name)
+    public static function findTemplate(int $id)
     {
-        $template = Template::where('name', '=', $name)->first();
+        $template = Template::where('id', '=', $id)->first();
 
         return $template ? $template->load('blocks') : [];
     }
 
-    public static function findDataForTemplate(string $name, $period = null): array
+    public static function findDataForTemplate(int $id, $period = null): array
     {
-        $template = static::findTemplate($name);
+        $template = static::findTemplate($id);
 
         if (!$template) {
             return [];
@@ -62,15 +63,20 @@ class StructureServiceProvider extends ServiceProvider
             ->toArray();
 
         $number = NumberRec::select('number_recs.*', 'blocks.name', 'blocks.tmpl_id', 'blocks.block_type')
+            ->join(DB::raw("(
+                SELECT tmp.block_id, MAX(tmp.insert_at) AS insert_at 
+                FROM number_recs as tmp 
+                GROUP BY tmp.block_id
+                ) as t2 USING (block_id, insert_at)"), function($join){
+            })
             ->join('blocks', 'blocks.id', '=', 'number_recs.block_id')
             ->whereIn('block_id', $list_of_block_keys)
             ->where('number_recs.insert_at', '>=', $last[0])
             ->orderBy('number_recs.id', 'desc')
-            ->take(1)
             ->get()
             ->toArray();
 
-        return array_merge($graph, $number);
+        return array_merge($number, $graph);
     }
 
     /**
@@ -89,7 +95,7 @@ class StructureServiceProvider extends ServiceProvider
     private static function calcInterval ($period = null): array
     {
         $start = 'now';
-        $interval = 'P1D';
+        $interval = 'P30D';
 
         if ($period && is_string($period)) {
             $period_arr = explode('_', $period);
