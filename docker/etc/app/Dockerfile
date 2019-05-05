@@ -24,6 +24,8 @@ RUN apt-get update && apt-get install -y \
     nodejs \
     npm
 
+RUN npm install -g laravel-echo-server
+
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 

@@ -168,8 +168,6 @@ const app = new Vue({
                 let obj = JSON.parse(str);
                 let blocks = {};
 
-                console.log('json_structure', obj);
-
                 obj.blocks.forEach(function (item) {
                     blocks[item.name] = item;
                 });
@@ -198,8 +196,6 @@ const app = new Vue({
                 let arr = JSON.parse(str);
                 let result = {};
 
-                console.log('json_data', arr);
-
                 arr.forEach(function (item) {
                     result[item.name] = item.content;
                 });
@@ -213,11 +209,8 @@ const app = new Vue({
         },
         createReportComponents: function () {
             for (let key in store.state.dataset) {
-                console.log(key);
-
                 let replaceElement = document.getElementById(key);
                 let component = this.componentReportFabric(replaceElement);
-                console.log('object', component);
 
                 replaceElement.parentNode.replaceChild(component.$mount().$el, replaceElement);
             }

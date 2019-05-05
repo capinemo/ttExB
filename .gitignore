@@ -7,13 +7,15 @@
 /src/expo/composer.lock
 /src/expo/node_modules
 /src/expo/package-lock.json
-/src/expo.phpunit.result.cache
-/src/expoHomestead.json
-/src/expoHomestead.yaml
-/src/exponpm-debug.log
-/src/expoyarn-error.log
+/src/expo/phpunit.result.cache
+/src/expo/Homestead.json
+/src/expo/Homestead.yaml
+/src/expo/npm-debug.log
+/src/expo/yarn-error.log
+/src/expo/laravel-echo-server.lock
 /node_modules
 /docker/log
 /docker/db
+/docker/redis
 
 

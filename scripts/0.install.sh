@@ -27,3 +27,12 @@ fi
 
 sudo docker-compose exec app bash -c "cd ./${PRDIR} && composer update"
 sudo docker-compose exec app bash -c "cd ./${PRDIR} && npm install"
+
+
+if [ ! -f $FLDIR'/laravel-echo-server.json' ]
+then
+    sudo docker-compose exec app bash -c "cd ./${PRDIR} && laravel-echo-server init"
+fi
+
+sudo docker-compose exec app bash -c "cd ./${PRDIR} && laravel-echo-server stop"
+sudo docker-compose exec app bash -c "cd ./${PRDIR} && laravel-echo-server start" >>/dev/null 2>&1 &
