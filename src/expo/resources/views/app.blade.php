@@ -9,6 +9,9 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
+        <link rel="stylesheet" type="text/css" media="all" href="css/app.css">
+        <script src="js/app.js" defer></script>
+
         <!-- Styles -->
         <style>
             html, body {
@@ -42,6 +45,7 @@
 
             .content {
                 text-align: center;
+                width: 90%;
             }
 
             .title {
@@ -61,6 +65,10 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            #reports {
+                width: 100%;
+                min-height: 400px;
+            }
         </style>
     </head>
     <body>
@@ -78,21 +86,8 @@
                     @endauth
                 </div>
             @endif
-
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                @yield('content')
             </div>
         </div>
     </body>
