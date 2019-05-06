@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\EventChangeReportData;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Template;
+use App\Models\Block;
 use App\Models\GraphRec;
 use App\Models\NumberRec;
 
@@ -77,6 +79,24 @@ class StructureServiceProvider extends ServiceProvider
             ->toArray();
 
         return array_merge($number, $graph);
+    }
+
+    public static function insertNumberBlockContent (int $tmpl_id, string $block_name, $value)
+    {
+        // TODO must check existsing of block firstly
+
+        $target = Block::where('name', $block_name)
+            ->where('tmpl_id', $tmpl_id)
+            ->first();
+
+        $num_rec = new NumberRec();
+        $num_rec->block_id = $target->id;
+        $num_rec->source_id = 3;
+        $num_rec->content = (int) $value;
+        $num_rec->save();
+
+        // sending to event block name and new value
+        event(new EventChangeReportData($num_rec->block->tmpl_id, $num_rec->block->name, $num_rec->content));
     }
 
     /**

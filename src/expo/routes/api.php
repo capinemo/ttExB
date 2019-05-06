@@ -24,3 +24,5 @@ Route::get('/templates/{id}/', 'TemplateController@find');
 Route::get('/templates/{id}/data/', 'TemplateController@data');
 
 Route::get('/templates', 'TemplateController@index');
+
+Route::post('/templates/{id}/set/', 'TemplateController@set');

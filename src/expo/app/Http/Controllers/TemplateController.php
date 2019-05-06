@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NumberRec;
 use App\Models\Template;
 use Validator;
 use App\Providers\StructureServiceProvider as Structure;
@@ -33,9 +34,9 @@ class TemplateController extends Controller
     /**
      * Returns data for structure
      */
-    public function data(Request $request, string $name)
+    public function data(Request $request, string $id)
     {
-        $name = preg_replace('/[^a-zA-Z\d\-\_]/', '', $name);
+        $name = preg_replace('/[^a-zA-Z\d\-\_]/', '', $id);
 
         // string interval
         $period = $request->post('period') ?? null; // TODO: need a sanitizing
@@ -50,12 +51,20 @@ class TemplateController extends Controller
                 ? $period
                 : null;
 
-        if ($response =  Structure::findDataForTemplate($name, $filter)) {
+        if ($response =  Structure::findDataForTemplate($id, $filter)) {
             return $response;
         }
 
-
         return response('[]', 404)
             ->header('Content-Type', 'application/json');
+    }
+
+    public function set(Request $request, string $id)
+    {
+        $data = json_decode($request->post('json'));
+
+        // filtering template ID and post data
+
+        Structure::insertNumberBlockContent((int) $id, $data->name, $data->value);
     }
 }
