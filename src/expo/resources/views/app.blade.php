@@ -9,7 +9,9 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
+
         <link rel="stylesheet" type="text/css" media="all" href="css/app.css">
+        <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
         <script src="js/app.js" defer></script>
 
         <!-- Styles -->

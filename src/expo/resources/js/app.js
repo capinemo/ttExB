@@ -33,6 +33,13 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.use(Vuex);
 Vue.use(VueRouter);
 
+import Echo from "laravel-echo"
+
+window.Echo = new Echo({
+    broadcaster: 'socket.io',
+    host: window.location.hostname + ':6001'
+});
+
 const store = new Vuex.Store({
     state: {
         templates: [], // template list for loading new templates
@@ -51,13 +58,17 @@ const store = new Vuex.Store({
         },
         setStructure (state, arr) {
             state.structure = arr;
-            //console.warn(state.structure);
-            console.warn('structure', state.structure);
+            //console.warn('structure', state.structure);
         },
         setDataSet (state, obj) {
             state.dataset = obj;
-            console.warn('dataset', state.dataset);
-            console.warn('html', state.structure.data);
+            //console.warn('dataset', state.dataset);
+            //console.warn('html', state.structure.data);
+
+            window.Echo.channel('ReportChannel.' + state.actual)
+                .listen('EventChangeReportData', (e) => {
+                    console.log(e);
+                });
         },
         setPeriod (state, period) {
             state.period = period;
@@ -107,10 +118,12 @@ const app = new Vue({
 
             fetch(link, this.getFetchOptions()).then(function(response) {
                 response.text().then(function(text) {
+                    window.Echo.leave('ReportChannel.' + store.state.actual);
                     store.commit('setActual', id);
                     store.commit('setStructure', app.parseStructure(text));
                     store.commit('setPeriod', null);
-                    //store.commit('setDataSet', {});
+                    store.commit('setDataSet', {});
+
                     app.loadData();
                 }).catch(function(err) {
                     //handle error
@@ -121,7 +134,6 @@ const app = new Vue({
             let period = null;
 
             if (store.state.period) {
-                console.log(store.state.period, typeof store.state.period)
                 if (typeof store.state.period === 'string') {
                     period = '?period=' + store.state.period
                 }
@@ -136,12 +148,8 @@ const app = new Vue({
                 return;
             }
 
-            console.log(period);
-
             let link = 'http://localhost/api/templates/' + store.state.actual + '/data'
                 + (period ? period : '');
-
-            console.log(link);
 
             fetch(link, this.getFetchOptions()).then(function(response) {
                 response.text().then(function(text) {
@@ -177,13 +185,12 @@ const app = new Vue({
                 obj.data.match(/reportComponent id="([\d\S]+)"/ig).forEach(function (item) {
                     let block = item.replace('reportComponent id="', '').replace('"', '');
 
-                    //obj.data = obj.data.replace(item, 'reportComponent');
-
                     obj.data = obj.data.replace(item,
                         item + ' data-type="' + blocks[block].block_type + '"'
                         + ' data-id="' + blocks[block].id + '"'
                     );
                 });
+
                 return obj;
             } catch (e) {
                 //handle error
@@ -193,6 +200,7 @@ const app = new Vue({
         },
         parseData: function (str) {
             try {
+
                 let arr = JSON.parse(str);
                 let result = {};
 
