@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\NumberRec;
 use Illuminate\Console\Command;
+use App\Events\EventChangeReportData;
 
 /**
  * Class RunGenPage
@@ -66,5 +67,8 @@ class RunGenPage extends Command
         $num_rec->source_id = 3;
         $num_rec->content = (int) $num;
         $num_rec->save();
+
+        // sending to event block name and new value
+        event(new EventChangeReportData($num_rec->block->tmpl_id, $num_rec->block->name, $num_rec->content));
     }
 }
