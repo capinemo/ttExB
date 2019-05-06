@@ -54289,7 +54289,9 @@ var store = new Vuex.Store({
       //console.warn('html', state.structure.data);
 
       window.Echo.channel('ReportChannel.' + state.actual).listen('EventChangeReportData', function (e) {
-        console.log(e);
+        // checks & parsing
+        console.log(e.name);
+        state.dataset[e.name] = e.value;
       });
     },
     setPeriod: function setPeriod(state, period) {
