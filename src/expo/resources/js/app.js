@@ -55,6 +55,15 @@ const store = new Vuex.Store({
         },
         setActual (state, id) {
             state.actual = id;
+
+            window.Echo.leave('ReportChannel.' + store.state.actual);
+
+            window.Echo.channel('ReportChannel.' + state.actual)
+                .listen('EventChangeReportData', (e) => {
+                    // checks & parsing
+                    console.log(e.name);
+                    state.dataset[e.name] = e.value;
+                });
         },
         setStructure (state, arr) {
             state.structure = arr;
@@ -64,13 +73,6 @@ const store = new Vuex.Store({
             state.dataset = obj;
             //console.warn('dataset', state.dataset);
             //console.warn('html', state.structure.data);
-
-            window.Echo.channel('ReportChannel.' + state.actual)
-                .listen('EventChangeReportData', (e) => {
-                    // checks & parsing
-                    console.log(e.name);
-                    state.dataset[e.name] = e.value;
-                });
         },
         setPeriod (state, period) {
             state.period = period;
@@ -120,7 +122,6 @@ const app = new Vue({
 
             fetch(link, this.getFetchOptions()).then(function(response) {
                 response.text().then(function(text) {
-                    window.Echo.leave('ReportChannel.' + store.state.actual);
                     store.commit('setActual', id);
                     store.commit('setStructure', app.parseStructure(text));
                     store.commit('setPeriod', null);
@@ -163,13 +164,13 @@ const app = new Vue({
                 });
             });
         },
-        getFetchOptions: function () {
+        getFetchOptions: function (method = 'GET') {
             let head = new Headers({
                 'Authorization': '123'
             });
 
             return {
-                method: 'GET',
+                method: method,
                 headers: head,
             }
         },
@@ -249,6 +250,29 @@ const app = new Vue({
             }
 
             this.loadData();
+        },
+        sendNewValue: function () {
+            if (store.state.actual !== 1) {
+                return;
+            }
+
+            let packet = this.getFetchOptions('POST');
+            let data = new FormData();
+            data.append( "json", JSON.stringify({
+                name: 'block13',
+                value: Math.floor(Math.random() * 60) + 1
+            }) );
+
+            packet.body = data;
+
+            fetch( 'http://localhost/api/templates/' + store.state.actual + '/set', packet)
+                .then(function(res) {
+                    console.log(res);
+                })
+                .catch(function(err) {
+                    console.log(err);
+                })
+
         }
     }
 });

@@ -23,6 +23,7 @@
                     <button type="button" v-on:click="setPeriod('3_hour');" class="btn btn-primary m-1">3 hour</button>
                     <button type="button" v-on:click="setPeriod('1_day');" class="btn btn-primary m-1">Last day</button>
                     <button type="button" v-on:click="setPeriod('2019-05-01 00:00:00', '2019-05-10 00:00:00');" class="btn btn-primary m-1">10 days</button>
+                    <button type="button" v-on:click="sendNewValue()" class="btn btn-warning m-1">Generate block13</button>
                 </div>
             </div>
         </div>
