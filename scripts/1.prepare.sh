@@ -38,9 +38,7 @@ cd $DOCDIR
 
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan migrate"
 #sudo docker-compose exec app bash -c "php ./${PRDIR}/artisan db:seed"
-#sudo docker-compose exec app bash -c "cd ./${PRDIR} && npm run dev"
-
-#sudo docker-compose exec app bash -c "cd ./${PRDIR} && laravel-echo-server start"
+sudo docker-compose exec app bash -c "cd ./${PRDIR} && npm run dev"
 
 
 

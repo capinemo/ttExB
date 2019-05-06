@@ -15,9 +15,6 @@
     return (int) $user->id === (int) $id;
 });*/
 
-//Broadcast::routes(['middleware' => ['web', 'auth']]);
-//Broadcast::channel('ReportChannel.{tmpl_id}', \App\Broadcasting\ReportChannel::class);
-
 Broadcast::channel('ReportChannel.{tmpl_id}', function(\App\User $user, int $template_id) {
     return true;
 });
