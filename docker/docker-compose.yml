@@ -46,5 +46,5 @@ services:
     ports:
       - '6379:6379'
     volumes:
-      - ./redis:/bitnami/redis/data
+      - ./redis:/data
       - ./etc/redis.conf:/usr/local/etc/redis/redis.conf
