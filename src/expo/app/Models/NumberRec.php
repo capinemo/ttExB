@@ -13,7 +13,7 @@ class NumberRec extends Model
      */
     public function block()
     {
-        return $this->belongsTo(Template::class, 'block_id');
+        return $this->belongsTo(Block::class, 'block_id');
     }
 
     public function source()
